@@ -166,7 +166,14 @@ pred</code></pre>
 <p>For each one of the 5-Fold cross validation we have an estimation of the out of sample error given by 1-Accuracy:</p>
 <pre class="r"><code>res &lt;- mod2$resample
 res &lt;- mutate(res, err.est=1-Accuracy)
-me.err &lt;- mean(res$err.est)
+res</code></pre>
+<pre><code>##    Accuracy     Kappa   Resample     err.est
+## 1 0.9949032 0.9935527 Fold1.Rep1 0.005096840
+## 2 0.9956688 0.9945216 Fold2.Rep1 0.004331210
+## 3 0.9966862 0.9958082 Fold5.Rep1 0.003313790
+## 4 0.9928662 0.9909762 Fold4.Rep1 0.007133758
+## 5 0.9959236 0.9948435 Fold3.Rep1 0.004076433</code></pre>
+<pre class="r"><code>me.err &lt;- mean(res$err.est)
 sd.err &lt;- sd(res$err.est)</code></pre>
 <div id="the-mean-of-the-out-of-sample-error-is-0.0047904-an-the-standard-deviation-is-0.0014566" class="section level4">
 <h4>The mean of the out-of-sample error is 0.0047904 an the standard deviation is 0.0014566</h4>

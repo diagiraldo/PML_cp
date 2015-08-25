@@ -68,6 +68,7 @@ For each one of the 5-Fold cross validation we have an estimation of the out of 
 ```{r err1, message=FALSE}
 res <- mod2$resample
 res <- mutate(res, err.est=1-Accuracy)
+res
 me.err <- mean(res$err.est)
 sd.err <- sd(res$err.est)
 ```
