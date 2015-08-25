@@ -13,7 +13,7 @@ library(pander)
 ```
 
 Load and convert the data:
-```{r load_data}
+```{r load_data, message=FALSE}
 train <- read.table('pml-training.csv', header=TRUE, sep=",")
 test <- read.table('pml-testing.csv', header=TRUE, sep=",")
 train[, 12:159] <- lapply(train[, 12:159], function(x) as.numeric(as.character(x)))
@@ -33,28 +33,43 @@ Remove variables with near to zero variance:
 nzv <- nearZeroVar(train[,-60])
 train2 <- train[,-nzv]
 test2 <- test[,-nzv]
+train2 <- train2[,-(1:6)]
+test2 <- test2[,-(1:6)]
 ```
 
 ### Model Training
-As this is a multi-class classification problem, we can use Decision Trees or Random Forests (RF), I chose RF because in most of the problems their performance is better than Trees.
-```{r modelfit}
-modFit <- train(classe~., data=train2, method="rf")
-pander(modFit)
+To estimate the out of sample error we set the training options to perform a K-Fold cross-validation with K=5:
+```{r tropt}
+trc <- trainControl(method = "repeatedcv", number = 5, repeats = 1)
 ```
 
-### Predictions with the model:
-```{r predict}
-pred <- predict(modFit, test2)
+As this is a multi-class classification problem, we can use Decision Trees or Random Forests (RF), I chose RF because in most of the problems their performance is better than Trees.  
+Due to the model takes a considerable amount of time to run, I save it in a file:
+```{r modelfitsave, eval=FALSE, message=FALSE}
+mod2 <- train(classe~., trControl = trc, data=train2 , method="rf")
+save(mod2, file = "model_rf.rda")
+```
 
+### Predictions with the model
+We load the file with the model:
+```{r load_model}
+load("model_rf.rda")
+mod2
+```
+
+and predict the class for the testing set:
+```{r predict, message=FALSE}
+pred <- predict(mod2, test2)
+pred
 ```
 
 ### Estimation of the out of sample error:
-We perform a K-fold cross-validation:
+For each one of the 5-Fold cross validation we have an estimation of the out of sample error given by 1-Accuracy:
+```{r err1, message=FALSE}
+res <- mod2$resample
+res <- mutate(res, err.est=1-Accuracy)
+me.err <- mean(res$err.est)
+sd.err <- sd(res$err.est)
+```
 
-mod1 <- train(classe~., data=pr, method="rpart")
-mod2 <- train(classe~., data=train2, method="rpart")
-
-
-
-
-
+#### The mean of the out-of-sample error is `r me.err` an the standard deviation is `r sd.err`
