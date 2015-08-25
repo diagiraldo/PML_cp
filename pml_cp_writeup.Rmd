@@ -13,7 +13,7 @@ library(pander)
 ```
 
 Load and convert the data:
-```{r load_data, message=FALSE}
+```{r load_data, message=FALSE, warning=FALSE}
 train <- read.table('pml-training.csv', header=TRUE, sep=",")
 test <- read.table('pml-testing.csv', header=TRUE, sep=",")
 train[, 12:159] <- lapply(train[, 12:159], function(x) as.numeric(as.character(x)))

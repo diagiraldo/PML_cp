@@ -76,41 +76,8 @@ library(pander)</code></pre>
 <p>Load and convert the data:</p>
 <pre class="r"><code>train &lt;- read.table('pml-training.csv', header=TRUE, sep=&quot;,&quot;)
 test &lt;- read.table('pml-testing.csv', header=TRUE, sep=&quot;,&quot;)
-train[, 12:159] &lt;- lapply(train[, 12:159], function(x) as.numeric(as.character(x)))</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in FUN(X[[148L]], ...): NAs introduced by coercion</code></pre>
-<pre class="r"><code>test[, 12:159] &lt;- lapply(test[, 12:159], function(x) as.numeric(as.character(x)))</code></pre>
+train[, 12:159] &lt;- lapply(train[, 12:159], function(x) as.numeric(as.character(x)))
+test[, 12:159] &lt;- lapply(test[, 12:159], function(x) as.numeric(as.character(x)))</code></pre>
 <div id="pre-processing" class="section level3">
 <h3>Pre Processing</h3>
 <p>Remove variables where the 95% of the values were NA’s:</p>
